@@ -1,0 +1,33 @@
+{
+  "pages": [
+    "pages/auth/login/index",
+    "pages/auth/register/index",
+    "pages/index/index",
+    "pages/reports/list/index",
+    "pages/reports/detail/index",
+    "pages/notifications/index/index",
+    "pages/family/index",
+    "pages/profile/index/index",
+    "pages/profile/bind-phone/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "老人健康",
+    "navigationBarBackgroundColor": "#1F8A70",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F6F8FB"
+  },
+  "tabBar": {
+    "color": "#6B7280",
+    "selectedColor": "#1F8A70",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "首页" },
+      { "pagePath": "pages/reports/list/index", "text": "报告" },
+      { "pagePath": "pages/notifications/index/index", "text": "通知" },
+      { "pagePath": "pages/profile/index/index", "text": "我的" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,22 @@
+<view class="container" wx:if="{{report}}">
+  <view class="title">报告详情</view>
+  <view class="card">
+    <view class="row"><text>报告ID</text><text>{{report.id}}</text></view>
+    <view class="row"><text>风险等级</text><text class="tag-{{report.riskLevel}}">{{report.riskLevel}}</text></view>
+    <view>{{report.contentJson.summary.text || '--'}}</view>
+  </view>
+  <view class="card">
+    <view class="title" style="font-size: 16px;">基础体检信息</view>
+    <view class="row"><text>身高</text><text>{{doctorSummary.height || '--'}}</text></view>
+    <view class="row"><text>体重</text><text>{{doctorSummary.weight || '--'}}</text></view>
+    <view class="row"><text>BMI</text><text>{{doctorSummary.bmi || '--'}}</text></view>
+    <view class="row"><text>血压</text><text>{{doctorSummary.bloodPressure || '--'}}</text></view>
+    <view class="row"><text>空腹血糖</text><text>{{doctorSummary.fastingBloodGlucose || '--'}}</text></view>
+    <view style="margin-top: 8px;"><text>心电：{{doctorSummary.ecgFinding || '--'}}</text></view>
+    <view style="margin-top: 8px;"><text>B超：{{doctorSummary.bUltrasound || '--'}}</text></view>
+    <view style="margin-top: 8px;"><text>中医体质辨识：{{doctorSummary.tcmConstitution || '--'}}</text></view>
+  </view>
+  <view class="card" wx:if="{{report.contentJson.abnormalities}}">
+    <view wx:for="{{report.contentJson.abnormalities}}" wx:key="index">- {{item.name}}：{{item.text || item.level}}</view>
+  </view>
+</view>

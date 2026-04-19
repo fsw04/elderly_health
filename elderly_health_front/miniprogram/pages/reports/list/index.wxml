@@ -1,0 +1,10 @@
+<view class="container">
+  <view class="title">体检报告</view>
+  <view class="card">
+    <switch checked="{{onlyAbnormal}}" bindchange="toggleAbnormal" /><text style="margin-left:8px;">仅看异常</text>
+  </view>
+  <view class="card" wx:for="{{items}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+    <view class="row"><text>{{item.createdAt}}</text><text class="tag-{{item.riskLevel}}">{{item.riskLevel}}</text></view>
+    <view>{{item.contentJson.summary.text || '报告已生成'}}</view>
+  </view>
+</view>

@@ -1,0 +1,14 @@
+Page({
+  data: { onlyAbnormal: false, items: [] },
+  onShow() { this.loadData(); },
+  async loadData() {
+    const { mpApi } = require('../../../api/mp');
+    const res = await mpApi.reports({ page: 1, pageSize: 20, onlyAbnormal: this.data.onlyAbnormal ? 1 : 0 });
+    this.setData({ items: res.data.items || [] });
+  },
+  toggleAbnormal(e) { this.setData({ onlyAbnormal: e.detail.value }, () => this.loadData()); },
+  goDetail(e) {
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({ url: '/pages/reports/detail/index?id=' + id });
+  }
+});

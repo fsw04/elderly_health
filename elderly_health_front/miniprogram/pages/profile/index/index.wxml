@@ -1,0 +1,31 @@
+<view class="container">
+  <view class="title">个人资料</view>
+  <view class="card">
+    <view class="row">
+      <text class="row-label">手机号</text>
+      <input class="row-input" value="{{form.phone || '--'}}" disabled />
+    </view>
+    <view class="row">
+      <text class="row-label">姓名</text>
+      <input class="row-input" placeholder="请输入姓名" value="{{form.name}}" data-field="name" bindinput="onInput" />
+    </view>
+    <view class="row">
+      <text class="row-label">生日</text>
+      <input class="row-input" placeholder="YYYYMMDD" value="{{form.birthDate}}" data-field="birthDate" bindinput="onInput" />
+    </view>
+    <view class="row">
+      <text class="row-label">年龄</text>
+      <input class="row-input" value="{{form.age || '--'}}" disabled />
+    </view>
+    <view class="row">
+      <text class="row-label">证件号</text>
+      <input class="row-input" placeholder="请输入证件号" value="{{form.idCard}}" data-field="idCard" bindinput="onInput" />
+    </view>
+    <view class="row">
+      <text class="row-label">现住址</text>
+      <input class="row-input" placeholder="请输入现住址" value="{{form.currentAddress}}" data-field="currentAddress" bindinput="onInput" />
+    </view>
+  </view>
+  <button class="btn-primary" bindtap="save">保存资料</button>
+  <button style="margin-top:12px;" bindtap="logout">退出登录</button>
+</view>

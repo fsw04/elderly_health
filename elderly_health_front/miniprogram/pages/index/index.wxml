@@ -1,0 +1,14 @@
+<view class="container">
+  <view class="title">健康首页</view>
+  <view class="card">
+    <view class="row"><text>姓名</text><text>{{home.me.name || home.me.phone || '未完善'}}</text></view>
+    <view class="row"><text>未读通知</text><text>{{home.counters.unreadNotifs || 0}}</text></view>
+    <view class="row"><text>待处理家属申请</text><text>{{home.counters.pendingFamilyRequests || 0}}</text></view>
+  </view>
+  <view class="card" wx:if="{{home.recentReport}}" bindtap="goReportDetail" data-id="{{home.recentReport.id}}">
+    <view class="row"><text>最近体检</text><text>{{home.recentReport.createdAt}}</text></view>
+    <view class="row"><text>风险等级</text><text class="tag-{{home.recentReport.riskLevel}}">{{home.recentReport.riskLevel}}</text></view>
+  </view>
+  <button class="btn-primary" bindtap="goReports">查看全部报告</button>
+  <button class="btn-primary" style="margin-top:12px;" bindtap="goFamily">家属绑定管理</button>
+</view>

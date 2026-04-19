@@ -1,0 +1,8 @@
+.back-top {
+  position: fixed;
+  right: 16px;
+  bottom: 88px;
+  z-index: 10;
+  background: #1f8a70;
+  color: #fff;
+}

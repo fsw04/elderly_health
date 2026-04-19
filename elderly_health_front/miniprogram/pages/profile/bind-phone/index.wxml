@@ -1,0 +1,9 @@
+<view class="container">
+  <view class="title">绑定手机号</view>
+  <view class="card">
+    <input placeholder="手机号" value="{{phone}}" bindinput="onPhone" />
+    <input placeholder="验证码" value="{{smsCode}}" bindinput="onCode" style="margin-top:12px;" />
+    <button class="btn-primary" style="margin-top:12px;" bindtap="sendSms">发送验证码</button>
+  </view>
+  <button class="btn-primary" bindtap="submit">提交绑定</button>
+</view>

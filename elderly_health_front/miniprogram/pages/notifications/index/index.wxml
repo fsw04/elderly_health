@@ -1,0 +1,7 @@
+<view class="container">
+  <view class="title">通知中心</view>
+  <view class="card" wx:for="{{items}}" wx:key="id" bindtap="markRead" data-id="{{item.id}}">
+    <view class="row"><text>{{item.title}}</text><text>{{item.isRead ? '已读' : '未读'}}</text></view>
+    <view>{{item.content}}</view>
+  </view>
+</view>

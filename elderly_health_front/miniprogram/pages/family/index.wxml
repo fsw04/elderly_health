@@ -1,0 +1,88 @@
+<view class="container">
+  <view class="title">家属绑定</view>
+  <view class="card" wx:if="{{loading}}">
+    <view>加载中...</view>
+  </view>
+  <view class="card" wx:if="{{errorMsg}}">
+    <view>{{errorMsg}}</view>
+    <button size="mini" type="primary" bindtap="loadData">重试</button>
+  </view>
+  <view class="card">
+    <input placeholder="目标手机号" value="{{targetPhone}}" bindinput="onPhone" />
+    <button class="btn-primary" style="margin-top:12px;" bindtap="createRequest" loading="{{actionKey==='create'}}" disabled="{{!!actionKey}}">发起绑定申请</button>
+  </view>
+  <view class="card">
+    <view class="row"><text>我的申请</text></view>
+    <picker mode="selector" range="{{statusOptions}}" value="{{requesterStatusIndex}}" bindchange="onRequesterStatusChange">
+      <view>筛选状态：{{requesterStatus}}</view>
+    </picker>
+    <view wx:if="{{requests.length === 0}}">暂无申请记录</view>
+    <view wx:for="{{requests}}" wx:key="id" style="margin-bottom: 8px;" data-index="{{index}}" bindtap="showRequesterDetail">
+      <view>{{item.targetPhone}} - {{item.status}}</view>
+      <button size="mini" data-id="{{item.id}}" catchtap="copyRequestId">复制ID</button>
+      <button
+        wx:if="{{item.status === 'pending'}}"
+        size="mini"
+        data-id="{{item.id}}"
+        catchtap="cancelRequest"
+        loading="{{actionKey===('cancel-' + item.id)}}"
+        disabled="{{!!actionKey}}"
+      >
+        取消申请
+      </button>
+    </view>
+    <button
+      wx:if="{{requesterHasMore}}"
+      size="mini"
+      bindtap="loadMoreRequester"
+      loading="{{requesterLoadingMore}}"
+    >
+      加载更多
+    </button>
+  </view>
+  <view class="card">
+    <view class="row"><text>待我确认</text></view>
+    <picker mode="selector" range="{{statusOptions}}" value="{{targetStatusIndex}}" bindchange="onTargetStatusChange">
+      <view>筛选状态：{{targetStatus}}</view>
+    </picker>
+    <view wx:if="{{targetRequests.length === 0}}">暂无待确认申请</view>
+    <view wx:for="{{targetRequests}}" wx:key="id" style="margin-bottom: 8px;" data-index="{{index}}" bindtap="showTargetDetail">
+      <view>{{item.targetPhone}} - {{item.status}}</view>
+      <button size="mini" data-id="{{item.id}}" catchtap="copyRequestId">复制ID</button>
+      <button size="mini" type="primary" data-id="{{item.id}}" catchtap="approveRequest" loading="{{actionKey===('approve-' + item.id)}}" disabled="{{!!actionKey}}">同意</button>
+      <button size="mini" style="margin-left: 8px;" data-id="{{item.id}}" catchtap="rejectRequest" loading="{{actionKey===('reject-' + item.id)}}" disabled="{{!!actionKey}}">拒绝</button>
+    </view>
+    <button
+      wx:if="{{targetHasMore}}"
+      size="mini"
+      bindtap="loadMoreTarget"
+      loading="{{targetLoadingMore}}"
+    >
+      加载更多
+    </button>
+  </view>
+  <view class="card">
+    <view class="row"><text>已绑定关系</text></view>
+    <view wx:if="{{links.length === 0}}">暂无绑定关系</view>
+    <view wx:for="{{links}}" wx:key="id" style="margin-bottom: 8px;">
+      <view>关系ID：{{item.id}} ({{item.relationType || '--'}})</view>
+      <button size="mini" data-id="{{item.id}}" bindtap="removeLink" loading="{{actionKey===('unlink-' + item.id)}}" disabled="{{!!actionKey}}">解绑</button>
+    </view>
+    <button
+      wx:if="{{linkHasMore}}"
+      size="mini"
+      bindtap="loadMoreLinks"
+      loading="{{linkLoadingMore}}"
+    >
+      加载更多
+    </button>
+  </view>
+  <button
+    wx:if="{{showBackTop}}"
+    class="back-top"
+    size="mini"
+    bindtap="backToTop"
+  >
+    回到顶部
+  </button>
+</view>

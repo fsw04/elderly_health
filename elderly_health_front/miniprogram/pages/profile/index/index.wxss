@@ -1,0 +1,14 @@
+.row {
+  margin-bottom: 10px;
+}
+
+.row-label {
+  width: 72px;
+  color: #374151;
+}
+
+.row-input {
+  flex: 1;
+  text-align: left;
+  color: #111827;
+}
