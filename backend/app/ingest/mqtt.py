@@ -197,7 +197,7 @@ def setup_mqtt():
     
     def on_connect(client, userdata, flags, rc):
         print("✅ 后端已成功连接到 MQTT Broker (Mosquitto), rc=" + str(rc))
-        client.subscribe("watch/+/up")
+        client.subscribe("watch/sensors/report")
 
     def on_message(client, userdata, msg):
         try:
