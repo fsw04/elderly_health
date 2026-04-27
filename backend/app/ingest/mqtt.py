@@ -129,23 +129,35 @@ async def process_vitals_to_db(payload: dict):
         result = await db.execute(select(User).where(User.phone == phone))
         user = result.scalar_one_or_none()
         
+        # if not user:
+        #     print(f"🆕 发现新用户 {name}，正在注册...")
+        #     user = User(
+        #         phone=phone,
+        #         name=name,
+        #         id_card=id_card,
+        #         device_id=device_id
+        #     )
+        #     db.add(user)
+        #     await db.commit()
+        #     await db.refresh(user)
+        # else:
+        #     print(f"✅ 找到已有用户 {name}，更新设备ID...")
+        #     user.device_id = device_id
+        #     user.name = name
+        #     user.id_card = id_card
+        #     await db.commit()
+
         if not user:
-            print(f"🆕 发现新用户 {name}，正在注册...")
-            user = User(
-                phone=phone,
-                name=name,
-                id_card=id_card,
-                device_id=device_id
-            )
-            db.add(user)
-            await db.commit()
-            await db.refresh(user)
-        else:
-            print(f"✅ 找到已有用户 {name}，更新设备ID...")
-            user.device_id = device_id
+            print(f"❌ 未找到匹配的用户 (手机号: {phone}, 姓名: {name})，数据已被拒绝入库。请先在系统中录入该用户。")
+            return
+            
+        print(f"✅ 找到匹配用户 {name}，更新设备ID...")
+        user.device_id = device_id
+        if name:
             user.name = name
+        if id_card:
             user.id_card = id_card
-            await db.commit()
+        await db.commit()
             
         # 2. 插入或更新体检会话数据
         print(f"📊 正在保存体检指标到 Session [{session_id}]...")
